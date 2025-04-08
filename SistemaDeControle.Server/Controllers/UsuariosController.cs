@@ -19,6 +19,13 @@ namespace sistemadecontrole.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Usuario usuario)
         {
+            if(usuario.Tipo == "Professor")
+            {
+                if (string.IsNullOrWhiteSpace(usuario.AreaAtuacao) || string.IsNullOrWhiteSpace(usuario.Formacao))
+                {
+                    return BadRequest("Atuação e formação tem que existir para o professor!!.");
+                }
+            }
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetById), new { id = usuario.Id }, usuario);

@@ -5,13 +5,14 @@ namespace sistemadecontrole.Server.Models
     [Table("Usuarios")]
     public class Usuario
     {
+        //string.Empty >> para garantir q a inicializacao nao seja nula
         public int Id { get; set; }
-        public string Nome { get; set; }
-        public string Email { get; set; }
-        public string Senha { get; set; }
-        public string Tipo { get; set; } // "aluno" ou "professor"
+        public string Nome { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Senha { get; set; } = string.Empty;
+        public string Tipo { get; set; } = string.Empty;
 
-        // Apenas para professores
+        // Atrb apenas para os professores, faco a verificacao na rota post
         public string? AreaAtuacao { get; set; }
         public string? Formacao { get; set; }
 

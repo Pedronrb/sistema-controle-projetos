@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "7aaYd5A2A0eVH4gQUDM4vP0NQNzmSgLToYpyr74f5uI=",
+  "Hash": "cBTlkIDI3Njj6qwhGwYvQJ4a72PAM6wps2kmJ5s88qw=",
   "Source": "SistemaDeControle.Server",
   "BasePath": "_content/SistemaDeControle.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\pedro\\OneDrive\\Área de Trabalho\\Github\\DellProject\\SistemaDeControle\\sistemadecontrole.client\\sistemadecontrole.client.esproj",
+      "Identity": "C:\\Users\\pedro\\OneDrive\\Área de Trabalho\\Github\\DellProject\\sistema-controle-projetos\\sistemadecontrole.client\\sistemadecontrole.client.esproj",
       "Version": 2,
       "Source": "sistemadecontrole.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
@@ -18,7 +18,15 @@
       "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
     }
   ],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "SistemaDeControle.Server\\wwwroot",
+      "Source": "SistemaDeControle.Server",
+      "ContentRoot": "C:\\Users\\pedro\\OneDrive\\Área de Trabalho\\Github\\DellProject\\sistema-controle-projetos\\SistemaDeControle.Server\\wwwroot\\",
+      "BasePath": "_content/SistemaDeControle.Server",
+      "Pattern": "**"
+    }
+  ],
   "Assets": [],
   "Endpoints": []
 }
