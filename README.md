@@ -1,40 +1,46 @@
-# 🧩 Sistema de Controle de Projetos – Dell Premier (Nivelamento)
+Sistema de Controle de Projetos – Dell Premier (Nivelamento)
 
-Este projeto faz parte de um **nivelamento prático** para o programa **Dell Premier**, com o objetivo de aplicar conhecimentos em **.NET (C#)** e **Angular** no desenvolvimento de um sistema completo de gerenciamento de projetos acadêmicos.
+Este projeto integra o nivelamento prático do programa Dell Premier, com o objetivo de aplicar conhecimentos em .NET (C#) no desenvolvimento de um sistema completo para gerenciamento de projetos acadêmicos.
+Objetivo do Projeto
 
----
+O sistema tem como finalidade permitir o cadastro de usuários (alunos e professores), o gerenciamento de projetos acadêmicos e a vinculação de alunos com funções específicas dentro desses projetos. Também contempla autenticação segura utilizando JWT e testes automatizados.
+Funcionalidades
+Autenticação e Usuários
 
-## 📌 Objetivo do Projeto
+    Login com token JWT.
 
-O sistema permite o **cadastro de usuários (alunos e professores)**, gerenciamento de **projetos acadêmicos**, e a **vinculação de alunos com funções específicas** dentro desses projetos. Além disso, inclui **autenticação segura com JWT** e **testes automatizados**.
+    Cadastro de usuários com distinção entre aluno e professor.
 
----
+        Professores possuem campos adicionais: área de atuação e formação.
 
-## 🚀 Funcionalidades
+Gestão de Projetos
 
-### 🛠️ Autenticação e Usuários
-- [x] Login com token JWT
-- [x] Cadastro de usuário com distinção entre aluno e professor
-  - Professores possuem campos adicionais: **área de atuação** e **formação**
+    Cadastro de projetos (restrito a professores).
 
-### 📂 Gestão de Projetos
-- [x] Cadastro de projetos (somente professores)
-- [x] Professor que cria o projeto torna-se automaticamente **coordenador**
-- [x] Vinculação de alunos a projetos com funções específicas:
-  - Estagiário, Júnior, Sênior, Master
-- [x] Listagem e detalhamento dos projetos:
-  - Nome, descrição, coordenador e equipe com respectivas funções
+    O professor que cria o projeto é automaticamente definido como coordenador.
 
-### 🧪 Testes
-- [x] Testes unitários e de integração para garantir a funcionalidade da aplicação
+    Vinculação de alunos a projetos com definição de funções específicas:
 
----
+        Estagiário, Júnior, Sênior e Master.
 
-## 🛠️ Tecnologias Utilizadas
+    Listagem e detalhamento de projetos:
 
-### Backend (.NET)
-- C# / ASP.NET Core
-- Entity Framework Core
-- SQL Server / SQLite
-- Autenticação JWT
-- Testes com xUnit ou MST
+        Nome, descrição, coordenador responsável e integrantes com suas respectivas funções.
+
+Testes
+
+    Implementação de testes unitários e de integração para assegurar o correto funcionamento do sistema.
+
+Tecnologias Utilizadas
+Backend (.NET)
+
+    C# / ASP.NET Core
+
+    Entity Framework Core
+
+    LocalDb
+
+    Autenticação com JWT
+
+    Testes com xUnit
+
