@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using sistemadecontrole.Server.Data;
-using sistemadecontrole.Server.Models;
-using sistemadecontrole.Server.DTOs;
+using SistemaDeControle.Server.Data;
+using SistemaDeControle.Server.Models;
+using SistemaDeControle.Server.DTOs;
 /*
  [Post]
  {
@@ -11,7 +11,7 @@ using sistemadecontrole.Server.DTOs;
   "funcao": "Júnior"  Fucao: {estágio, júnior, sênior, master}
 }
  */
-namespace sistemadecontrole.Server.Controllers
+namespace SistemaDeControle.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

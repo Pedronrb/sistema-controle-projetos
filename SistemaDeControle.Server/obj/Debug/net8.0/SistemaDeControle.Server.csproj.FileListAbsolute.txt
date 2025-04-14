@@ -172,10 +172,11 @@ C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\SistemaDeControle\S
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\SistemaDeControle\SistemaDeControle.Server\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\SistemaDeControle\SistemaDeControle.Server\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\SistemaDeControle\SistemaDeControle.Server\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\spa.proxy.json
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\appsettings.json
+C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\SistemaDeControle.Server.staticwebassets.runtime.json
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\SistemaDeControle.Server.staticwebassets.endpoints.json
-C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\spa.proxy.json
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\SistemaDeControle.Server.exe
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\SistemaDeControle.Server.deps.json
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\SistemaDeControle.Server.runtimeconfig.json
@@ -184,6 +185,7 @@ C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-pr
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\Humanizer.dll
+C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\Microsoft.AspNetCore.SpaProxy.dll
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\Microsoft.Build.Locator.dll
@@ -347,5 +349,3 @@ C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-pr
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\obj\Debug\net8.0\SistemaDeControle.Server.pdb
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\obj\Debug\net8.0\SistemaDeControle.Server.genruntimeconfig.cache
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\obj\Debug\net8.0\ref\SistemaDeControle.Server.dll
-C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\SistemaDeControle.Server\bin\Debug\net8.0\SistemaDeControle.Server.staticwebassets.runtime.json

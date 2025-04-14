@@ -7,6 +7,7 @@
     <SpaRoot>..\sistemadecontrole.client</SpaRoot>
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:54049</SpaProxyServerUrl>
+	<RootNamespace>SistemaDeControle.Server</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-namespace sistemadecontrole.Server.Models
+namespace SistemaDeControle.Server.Models
 {
     public class Projeto
     {

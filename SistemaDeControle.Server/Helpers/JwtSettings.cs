@@ -1,4 +1,4 @@
-namespace sistemadecontrole.Server.Helpers
+namespace SistemaDeControle.Server.Helpers
 {
     public class JwtSettings
     {

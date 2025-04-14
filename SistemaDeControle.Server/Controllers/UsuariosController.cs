@@ -1,47 +1,43 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using sistemadecontrole.Server.Data;
-using sistemadecontrole.Server.Models;
+using SistemaDeControle.Server.Models;
+using SistemaDeControle.Server.Services;
 
-namespace sistemadecontrole.Server.Controllers
+namespace SistemaDeControle.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class UsuariosController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly UsuarioService _usuarioService;
 
-        public UsuariosController(AppDbContext context)
+        public UsuariosController(UsuarioService usuarioService)
         {
-            _context = context;
+            _usuarioService = usuarioService;
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Usuario usuario)
         {
-            if(usuario.Tipo == "Professor")
-            {
-                if (string.IsNullOrWhiteSpace(usuario.AreaAtuacao) || string.IsNullOrWhiteSpace(usuario.Formacao))
-                {
-                    return BadRequest("Atuação e formação tem que existir para o professor!!.");
-                }
-            }
-            _context.Usuarios.Add(usuario);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetById), new { id = usuario.Id }, usuario);
+            var (isValid, errorMessage) = await _usuarioService.ValidarUsuarioAsync(usuario);
+            if (!isValid)
+                return BadRequest(errorMessage);
+
+            var novoUsuario = await _usuarioService.CriarUsuarioAsync(usuario);
+            return CreatedAtAction(nameof(GetById), new { id = novoUsuario.Id }, novoUsuario);
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var usuarios = await _context.Usuarios.ToListAsync();
+            var usuarios = await _usuarioService.ListarUsuariosAsync();
             return Ok(usuarios);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var usuario = await _context.Usuarios.FindAsync(id);
+            var usuario = await _usuarioService.BuscarPorIdAsync(id);
             if (usuario == null)
                 return NotFound();
 

@@ -1,16 +1,23 @@
-using sistemadecontrole.Server.Data;
-using sistemadecontrole.Server.Helpers;
+using SistemaDeControle.Server.Data;
+using SistemaDeControle.Server.Services;
+using SistemaDeControle.Server.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-var builder = WebApplication.CreateBuilder(args);
 
+var builder = WebApplication.CreateBuilder(args);
 var jwtSettingsSection = builder.Configuration.GetSection("Jwt");
-builder.Services.Configure<JwtSettings>(jwtSettingsSection);
 var jwtSettings = jwtSettingsSection.Get<JwtSettings>();
+// Verificação para evitar NullReferenceException
+if (jwtSettings is null)
+    throw new InvalidOperationException("JWT settings are not configured properly.");
+builder.Services.Configure<JwtSettings>(jwtSettingsSection);
+builder.Services.AddScoped<JwtService>();
 var key = Encoding.ASCII.GetBytes(jwtSettings.Key);
+builder.Services.AddScoped<UsuarioService>();
+
 
 builder.Services.AddAuthentication(options =>
 {

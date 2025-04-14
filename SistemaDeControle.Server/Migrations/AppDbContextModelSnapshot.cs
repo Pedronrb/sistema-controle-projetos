@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using sistemadecontrole.Server.Data;
+using SistemaDeControle.Server.Data;
 
 #nullable disable
 
@@ -21,7 +21,7 @@ namespace SistemaDeControle.Server.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("sistemadecontrole.Server.Models.Projeto", b =>
+            modelBuilder.Entity("SistemaDeControle.Server.Models.Projeto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace SistemaDeControle.Server.Migrations
                     b.ToTable("Projetos");
                 });
 
-            modelBuilder.Entity("sistemadecontrole.Server.Models.Usuario", b =>
+            modelBuilder.Entity("SistemaDeControle.Server.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,16 +73,15 @@ namespace SistemaDeControle.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("sistemadecontrole.Server.Models.VinculoProjeto", b =>
+            modelBuilder.Entity("SistemaDeControle.Server.Models.VinculoProjeto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,9 +108,9 @@ namespace SistemaDeControle.Server.Migrations
                     b.ToTable("Vinculos");
                 });
 
-            modelBuilder.Entity("sistemadecontrole.Server.Models.Projeto", b =>
+            modelBuilder.Entity("SistemaDeControle.Server.Models.Projeto", b =>
                 {
-                    b.HasOne("sistemadecontrole.Server.Models.Usuario", "Coordenador")
+                    b.HasOne("SistemaDeControle.Server.Models.Usuario", "Coordenador")
                         .WithMany("ProjetosCoordenados")
                         .HasForeignKey("CoordenadorId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -120,15 +119,15 @@ namespace SistemaDeControle.Server.Migrations
                     b.Navigation("Coordenador");
                 });
 
-            modelBuilder.Entity("sistemadecontrole.Server.Models.VinculoProjeto", b =>
+            modelBuilder.Entity("SistemaDeControle.Server.Models.VinculoProjeto", b =>
                 {
-                    b.HasOne("sistemadecontrole.Server.Models.Projeto", "Projeto")
+                    b.HasOne("SistemaDeControle.Server.Models.Projeto", "Projeto")
                         .WithMany("Vinculos")
                         .HasForeignKey("ProjetoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("sistemadecontrole.Server.Models.Usuario", "Usuario")
+                    b.HasOne("SistemaDeControle.Server.Models.Usuario", "Usuario")
                         .WithMany("ProjetosParticipando")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -139,12 +138,12 @@ namespace SistemaDeControle.Server.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("sistemadecontrole.Server.Models.Projeto", b =>
+            modelBuilder.Entity("SistemaDeControle.Server.Models.Projeto", b =>
                 {
                     b.Navigation("Vinculos");
                 });
 
-            modelBuilder.Entity("sistemadecontrole.Server.Models.Usuario", b =>
+            modelBuilder.Entity("SistemaDeControle.Server.Models.Usuario", b =>
                 {
                     b.Navigation("ProjetosCoordenados");
 

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using sistemadecontrole.Server.Models;
+using SistemaDeControle.Server.Models;
 
-namespace sistemadecontrole.Server.Data
+namespace SistemaDeControle.Server.Data
 {
     public class AppDbContext : DbContext //Herda de DbContext para interagir com o BD
     {

@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using sistemadecontrole.Server.Data;
+using SistemaDeControle.Server.Data;
 
-namespace sistemadecontrole.Server.Factories
+namespace SistemaDeControle.Server.Factories
 {
     public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {

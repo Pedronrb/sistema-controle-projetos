@@ -1,4 +1,4 @@
-namespace sistemadecontrole.Server.DTOs
+namespace SistemaDeControle.Server.DTOs
 {
     public class VinculoProjetoDTO {
         public int UsuarioId { get; set; }

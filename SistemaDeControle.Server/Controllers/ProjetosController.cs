@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using sistemadecontrole.Server.Data;
-using sistemadecontrole.Server.Models;
-using sistemadecontrole.Server.Dtos;
+using SistemaDeControle.Server.Data;
+using SistemaDeControle.Server.Models;
+using SistemaDeControle.Server.Dtos;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace sistemadecontrole.Server.Controllers
+namespace SistemaDeControle.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -22,13 +22,13 @@ namespace sistemadecontrole.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateProjetoRequest request)
+        public async Task<IActionResult> Post([FromBody] ProjetoDto request)
         {
             // Recupera o ID do professor logado
             var coordenadorId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
 
             var professor = await _context.Usuarios.FindAsync(coordenadorId);
-            if (professor == null || professor.Tipo.ToLower() != "professor")
+            if (professor == null || professor.Tipo != TipoUsuario.Professor)
             {
                 return BadRequest("Somente professores podem criar projetos.");
             }

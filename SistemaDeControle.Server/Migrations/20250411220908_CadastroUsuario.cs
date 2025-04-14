@@ -5,7 +5,7 @@
 namespace SistemaDeControle.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class InicialNova : Migration
+    public partial class CadastroUsuario : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace SistemaDeControle.Server.Migrations
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Tipo = table.Column<int>(type: "int", nullable: false),
                     AreaAtuacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Formacao = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },

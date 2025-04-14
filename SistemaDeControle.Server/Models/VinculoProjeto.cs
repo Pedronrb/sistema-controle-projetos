@@ -1,4 +1,4 @@
-namespace sistemadecontrole.Server.Models
+namespace SistemaDeControle.Server.Models
 {
 
     //So professor pode fazer vinculacao a paritr do projeto como coordenador.
