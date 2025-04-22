@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:54049",
+"RedirectUrl": "",
+"LaunchCommand": "npm start",
+"WorkingDirectory": "C:\\Users\\pedro\\OneDrive\\Área de Trabalho\\Github\\DellProject\\sistema-controle-projetos\\SistemaDeControle.Server\\..\\sistemadecontrole.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}
