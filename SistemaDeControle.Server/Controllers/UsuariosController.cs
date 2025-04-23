@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SistemaDeControle.Server.Models;
 using SistemaDeControle.Server.Services;
+using SistemaDeControle.Server.DTOs;
+
 
 namespace SistemaDeControle.Server.Controllers
 {
@@ -17,8 +19,18 @@ namespace SistemaDeControle.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Usuario usuario)
+        public async Task<IActionResult> Post([FromBody] UsuarioCriacaoDTO dto)
         {
+            var usuario = new Usuario
+            {
+                Nome = dto.Nome,
+                Email = dto.Email,
+                Senha = dto.Senha,
+                Tipo = dto.Tipo,
+                AreaAtuacao = dto.Tipo == TipoUsuario.Professor ? dto.AreaAtuacao : null,
+                Formacao = dto.Tipo == TipoUsuario.Professor ? dto.Formacao : null
+            };
+
             var (isValid, errorMessage) = await _usuarioService.ValidarUsuarioAsync(usuario);
             if (!isValid)
                 return BadRequest(errorMessage);

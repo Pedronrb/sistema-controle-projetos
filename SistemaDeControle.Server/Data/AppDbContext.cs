@@ -3,30 +3,24 @@ using SistemaDeControle.Server.Models;
 
 namespace SistemaDeControle.Server.Data
 {
-    public class AppDbContext : DbContext //Herda de DbContext para interagir com o BD
+    public class AppDbContext : DbContext
     {
-        //Constructor onde permite a injecao de dependencia via Program.cs
         public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options) //Options define a config do BD
+            : base(options)
         {
         }
 
-        //Representa as tabelas do BD
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Projeto> Projetos { get; set; }
         public DbSet<VinculoProjeto> Vinculos { get; set; }
 
-        //configurar detalhes dos relacionamentos entre tabelas
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Relacionamento 1:N - Projeto -> Coordenador (Usuario)
-            modelBuilder.Entity<Projeto>()
-                .HasOne(p => p.Coordenador)
-                .WithMany(u => u.ProjetosCoordenados)
-                .HasForeignKey(p => p.CoordenadorId)
-                .OnDelete(DeleteBehavior.Restrict);
+            // Define a chave primária composta
+            modelBuilder.Entity<VinculoProjeto>()
+                .HasKey(v => new { v.ProjetoId, v.UsuarioId });
 
             // Relacionamento N:N com dados extras - Usuario <-> Projeto via VinculoProjeto
             modelBuilder.Entity<VinculoProjeto>()

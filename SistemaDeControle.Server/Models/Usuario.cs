@@ -7,7 +7,7 @@ namespace SistemaDeControle.Server.Models
     [Table("Usuarios")]
     public class Usuario
     {
-        //string.Empty >> para garantir q a inicializacao nao seja nula
+        //string.Empty para garantir q a inicializacao nao seja nula
         public int Id { get; set; }
         public string Nome { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
@@ -18,6 +18,7 @@ namespace SistemaDeControle.Server.Models
         public string? AreaAtuacao { get; set; }
         public string? Formacao { get; set; }
 
+        //Rela. onde o Prof pode coordenada N projetos
         public ICollection<Projeto>? ProjetosCoordenados { get; set; }
         public ICollection<VinculoProjeto>? ProjetosParticipando { get; set; }
     }

@@ -11,15 +11,15 @@ using SistemaDeControle.Server.Data;
 namespace SistemaDeControle.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250411220908_CadastroUsuario")]
-    partial class CadastroUsuario
+    [Migration("20250423013020_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.3")
+                .HasAnnotation("ProductVersion", "9.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -32,9 +32,6 @@ namespace SistemaDeControle.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CoordenadorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -43,9 +40,12 @@ namespace SistemaDeControle.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UsuarioId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CoordenadorId");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Projetos");
                 });
@@ -86,25 +86,16 @@ namespace SistemaDeControle.Server.Migrations
 
             modelBuilder.Entity("SistemaDeControle.Server.Models.VinculoProjeto", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Funcao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ProjetoId")
                         .HasColumnType("int");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Funcao")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ProjetoId");
+                    b.HasKey("ProjetoId", "UsuarioId");
 
                     b.HasIndex("UsuarioId");
 
@@ -113,13 +104,9 @@ namespace SistemaDeControle.Server.Migrations
 
             modelBuilder.Entity("SistemaDeControle.Server.Models.Projeto", b =>
                 {
-                    b.HasOne("SistemaDeControle.Server.Models.Usuario", "Coordenador")
+                    b.HasOne("SistemaDeControle.Server.Models.Usuario", null)
                         .WithMany("ProjetosCoordenados")
-                        .HasForeignKey("CoordenadorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Coordenador");
+                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("SistemaDeControle.Server.Models.VinculoProjeto", b =>

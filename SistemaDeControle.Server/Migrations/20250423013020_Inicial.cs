@@ -5,7 +5,7 @@
 namespace SistemaDeControle.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class CadastroUsuario : Migration
+    public partial class Inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,32 +36,29 @@ namespace SistemaDeControle.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CoordenadorId = table.Column<int>(type: "int", nullable: false)
+                    UsuarioId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Projetos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Projetos_Usuarios_CoordenadorId",
-                        column: x => x.CoordenadorId,
+                        name: "FK_Projetos_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Vinculos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
                     ProjetoId = table.Column<int>(type: "int", nullable: false),
-                    Funcao = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    Funcao = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vinculos", x => x.Id);
+                    table.PrimaryKey("PK_Vinculos", x => new { x.ProjetoId, x.UsuarioId });
                     table.ForeignKey(
                         name: "FK_Vinculos_Projetos_ProjetoId",
                         column: x => x.ProjetoId,
@@ -77,14 +74,9 @@ namespace SistemaDeControle.Server.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Projetos_CoordenadorId",
+                name: "IX_Projetos_UsuarioId",
                 table: "Projetos",
-                column: "CoordenadorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vinculos_ProjetoId",
-                table: "Vinculos",
-                column: "ProjetoId");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vinculos_UsuarioId",
