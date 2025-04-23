@@ -11,7 +11,7 @@ namespace SistemaDeControle.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]  // Apenas usu·rios autenticados
+    [Authorize]  // Apenas usu√°rios autenticados
     public class ProjetosController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -21,16 +21,15 @@ namespace SistemaDeControle.Server.Controllers
             _context = context;
         }
 
-        // Endpoint para criaÁ„o de projeto
+        // Endpoint para cria√ß√£o de projeto
         [HttpPost]
         public async Task<IActionResult> CriarProjeto([FromBody] ProjetoCriacaoDTO projetoCriacaoDTO)
         {
-            // CorreÁ„o: Usando ClaimTypes.NameIdentifier para pegar o ID corretamente
             var usuarioIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (string.IsNullOrEmpty(usuarioIdString) || !int.TryParse(usuarioIdString, out var usuarioId))
             {
-                return Unauthorized("N„o foi possÌvel identificar o usu·rio.");
+                return Unauthorized("N√£o foi poss√≠vel identificar o usu√°rio.");
             }
 
             var usuario = await _context.Usuarios.FindAsync(usuarioId);
@@ -40,7 +39,7 @@ namespace SistemaDeControle.Server.Controllers
                 return Unauthorized("Apenas professores podem criar projetos.");
             }
 
-            // CriaÁ„o do projeto
+            // Cria√ß√£o do projeto
             var projeto = new Projeto
             {
                 Nome = projetoCriacaoDTO.Nome,
@@ -50,12 +49,12 @@ namespace SistemaDeControle.Server.Controllers
             _context.Projetos.Add(projeto);
             await _context.SaveChangesAsync();
 
-            // Vincula o professor ao projeto como coordenador
+            
             var vinculo = new VinculoProjeto
             {
                 UsuarioId = usuario.Id,
                 ProjetoId = projeto.Id,
-                Funcao = Funcao.Master // O professor È o coordenador (Master)
+                Funcao = Funcao.Master 
             };
 
             _context.Vinculos.Add(vinculo);
@@ -64,7 +63,7 @@ namespace SistemaDeControle.Server.Controllers
             return CreatedAtAction(nameof(CriarProjeto), new { id = projeto.Id }, projeto);
         }
 
-        // Endpoint para listagem de projetos
+       
         [HttpGet]
         public async Task<IActionResult> ListarProjetos()
         {
@@ -72,7 +71,7 @@ namespace SistemaDeControle.Server.Controllers
             return Ok(projetos);
         }
 
-        // Endpoint para detalhamento de projeto
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> DetalharProjeto(int id)
         {
@@ -82,7 +81,7 @@ namespace SistemaDeControle.Server.Controllers
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             if (projeto == null)
-                return NotFound("Projeto n„o encontrado.");
+                return NotFound("Projeto n√£o encontrado.");
 
             var projetoDTO = new ProjetoDTO
             {
@@ -91,7 +90,7 @@ namespace SistemaDeControle.Server.Controllers
                 Descricao = projeto.Descricao,
                 Vinculos = projeto.Vinculos.Select(v => new VinculoDTO
                 {
-                    AlunoNome = v.Usuario?.Nome ?? "Nome n„o disponÌvel",
+                    AlunoNome = v.Usuario?.Nome ?? "Nome n√£o dispon√≠vel",
                     Funcao = v.Funcao
                 }).ToList()
             };
@@ -99,13 +98,13 @@ namespace SistemaDeControle.Server.Controllers
             return Ok(projetoDTO);
         }
 
-        // Endpoint para ediÁ„o de projeto
+       
         [HttpPut("{id}")]
         public async Task<IActionResult> EditarProjeto(int id, [FromBody] ProjetoDTO projetoDTO)
         {
             var projeto = await _context.Projetos.FindAsync(id);
             if (projeto == null)
-                return NotFound("Projeto n„o encontrado.");
+                return NotFound("Projeto n√£o encontrado.");
 
             projeto.Nome = projetoDTO.Nome;
             projeto.Descricao = projetoDTO.Descricao;
@@ -116,17 +115,17 @@ namespace SistemaDeControle.Server.Controllers
             return NoContent();
         }
 
-        // Endpoint para vinculaÁ„o de aluno a um projeto
+        
         [HttpPost("{projetoId}/vincular-aluno")]
         public async Task<IActionResult> VincularAluno(int projetoId, [FromBody] VinculoAlunoDTO vinculoDTO)
         {
             var projeto = await _context.Projetos.FindAsync(projetoId);
             if (projeto == null)
-                return NotFound("Projeto n„o encontrado.");
+                return NotFound("Projeto n√£o encontrado.");
 
             var usuario = await _context.Usuarios.FindAsync(vinculoDTO.AlunoId);
             if (usuario == null || usuario.Tipo != TipoUsuario.Aluno)
-                return BadRequest("Usu·rio n„o encontrado ou tipo de usu·rio inv·lido.");
+                return BadRequest("Usu√°rio n√£o encontrado ou tipo de usu√°rio inv√°lido.");
 
             var vinculo = new VinculoProjeto
             {
@@ -139,6 +138,108 @@ namespace SistemaDeControle.Server.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(vinculo);
+        }
+
+      
+        [HttpDelete("{projetoId}/desvincular-aluno/{alunoId}")]
+        public async Task<IActionResult> DesvincularAluno(int projetoId, int alunoId)
+        {
+            var projeto = await _context.Projetos.FindAsync(projetoId);
+            if (projeto == null)
+                return NotFound("Projeto n√£o encontrado.");
+
+            var vinculo = await _context.Vinculos
+                .FirstOrDefaultAsync(v => v.ProjetoId == projetoId && v.UsuarioId == alunoId);
+
+            if (vinculo == null)
+                return BadRequest("Aluno n√£o vinculado a esse projeto.");
+
+            _context.Vinculos.Remove(vinculo);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        
+        [HttpPost("{projetoId}/promover/{usuarioId}")]
+        public async Task<IActionResult> PromoverUsuario(int projetoId, int usuarioId, [FromBody] string novaFuncao)
+        {
+            
+            var projeto = await _context.Projetos.FindAsync(projetoId);
+            if (projeto == null)
+                return NotFound("Projeto n√£o encontrado.");
+
+            
+            var usuario = await _context.Usuarios.FindAsync(usuarioId);
+            if (usuario == null)
+                return BadRequest("Usu√°rio n√£o encontrado.");
+
+            
+            var vinculo = await _context.Vinculos
+                .FirstOrDefaultAsync(v => v.ProjetoId == projetoId && v.UsuarioId == usuarioId);
+
+            if (vinculo == null)
+                return BadRequest("Usu√°rio n√£o est√° vinculado a esse projeto.");
+
+           
+            var usuarioIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(usuarioIdString) || !int.TryParse(usuarioIdString, out var usuarioIdLogado))
+            {
+                return Unauthorized("N√£o foi poss√≠vel identificar o usu√°rio.");
+            }
+
+            // Verifica se o coordenador logado √© o respons√°vel pelo projeto (Master)
+            var vinculoProfessor = await _context.Vinculos
+                .FirstOrDefaultAsync(v => v.ProjetoId == projetoId && v.UsuarioId == usuarioIdLogado && v.Funcao == Funcao.Master);
+
+            if (vinculoProfessor == null)
+            {
+                return Unauthorized("Somente o coordenador do projeto pode promover usu√°rios.");
+            }
+
+            
+            if (novaFuncao.ToUpper() == Funcao.Master.ToString())
+            {
+                
+                var masterExistente = await _context.Vinculos
+                    .FirstOrDefaultAsync(v => v.ProjetoId == projetoId && v.Funcao == Funcao.Master);
+
+                if (masterExistente != null)
+                {
+                    return BadRequest("J√° existe um Master ");
+                }
+
+                
+                vinculo.Funcao = Funcao.Master;
+            }
+            
+            else if (novaFuncao.ToUpper() == Funcao.Senior.ToString())
+            {
+                
+                vinculo.Funcao = Funcao.Senior;
+            }
+            
+            else if (novaFuncao.ToUpper() == Funcao.Junior.ToString())
+            {
+                
+                vinculo.Funcao = Funcao.Junior;
+            }
+            
+            else if (novaFuncao.ToUpper() == Funcao.Estagiario.ToString())
+            {
+               
+                vinculo.Funcao = Funcao.Estagiario;
+            }
+            else
+            {
+                return BadRequest("Fun√ß√£o inv√°lida.");
+            }
+
+           
+            _context.Vinculos.Update(vinculo);
+            await _context.SaveChangesAsync();
+
+            return Ok("Usu√°rio promovido com sucesso.");
         }
     }
 }
