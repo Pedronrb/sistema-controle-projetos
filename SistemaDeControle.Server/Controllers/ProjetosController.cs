@@ -11,7 +11,7 @@ namespace SistemaDeControle.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]  // Apenas usuários autenticados
+    [Authorize] 
     public class ProjetosController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -21,7 +21,6 @@ namespace SistemaDeControle.Server.Controllers
             _context = context;
         }
 
-        // Endpoint para criação de projeto
         [HttpPost]
         public async Task<IActionResult> CriarProjeto([FromBody] ProjetoCriacaoDTO projetoCriacaoDTO)
         {

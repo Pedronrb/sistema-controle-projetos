@@ -1,1 +1,2 @@
 C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\SistemaDeControle\sistemadecontrole.client\obj\Debug\sistemadecontrole.client.esproj.CoreCompileInputs.cache
+C:\Users\pedro\OneDrive\Área de Trabalho\Github\DellProject\sistema-controle-projetos\sistemadecontrole.client\obj\Debug\sistemadecontrole.client.esproj.CoreCompileInputs.cache

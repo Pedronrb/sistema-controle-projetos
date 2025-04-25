@@ -24,13 +24,10 @@ namespace SistemaDeControle.Tests.TesteController
         [Fact]
         public async Task Get_Usuarios_ReturnsSuccessStatusCode()
         {
-            // Arrange
             var client = _factory.CreateClient();
 
-            // Act
             var response = await client.GetAsync("/api/usuarios");
 
-            // Assert
             response.EnsureSuccessStatusCode(); // Verifica se o código de status é 200-299
             Assert.Equal("application/json; charset=utf-8", response.Content?.Headers?.ContentType?.ToString()); // Verifica o tipo de conteúdo da resposta
         }
@@ -39,22 +36,18 @@ namespace SistemaDeControle.Tests.TesteController
         [Fact]
         public async Task GetById_Usuario_ReturnsSuccessStatusCode()
         {
-            // Arrange
             var client = _factory.CreateClient();
             var usuarioId = 1; // ID de um usuário válido no banco de dados para o teste
 
-            // Act
             var response = await client.GetAsync($"/api/usuarios/{usuarioId}");
 
-            // Assert
-            response.EnsureSuccessStatusCode(); // Verifica se o código de status é 200-299
+            response.EnsureSuccessStatusCode();
         }
 
         // Teste para o POST: api/usuarios
         [Fact]
         public async Task Post_Usuario_ReturnsCreatedStatusCode()
         {
-            // Arrange
             var client = _factory.CreateClient();
             var usuario = new Usuario
             {
@@ -67,11 +60,9 @@ namespace SistemaDeControle.Tests.TesteController
             var json = JsonConvert.SerializeObject(usuario); // Serializa o objeto para JSON
             var content = new StringContent(json, Encoding.UTF8, "application/json"); // Prepara o conteúdo para envio
 
-            // Act
             var response = await client.PostAsync("/api/usuarios", content);
 
-            // Assert
-            response.EnsureSuccessStatusCode(); // Verifica se o código de status é 200-299
+            response.EnsureSuccessStatusCode();
             Assert.Equal(System.Net.HttpStatusCode.Created, response.StatusCode); // Verifica se o código de status é 201 Created
         }
 
@@ -79,14 +70,12 @@ namespace SistemaDeControle.Tests.TesteController
         [Fact]
         public void TestWithServiceScope()
         {
-            // Arrange
-            var scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>(); // Obtém a fábrica de escopo de serviços
+            var scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
             using (var scope = scopeFactory.CreateScope()) // Cria um escopo para resolver os serviços
             {
                 var serviceProvider = scope.ServiceProvider;
-                var dbContext = serviceProvider.GetRequiredService<AppDbContext>(); // Resolve o DbContext
+                var dbContext = serviceProvider.GetRequiredService<AppDbContext>();
 
-                // Assert
                 Assert.NotNull(dbContext); // Verifica se o DbContext foi resolvido corretamente
             }
         }

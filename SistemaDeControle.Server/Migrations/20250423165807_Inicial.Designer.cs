@@ -11,7 +11,7 @@ using SistemaDeControle.Server.Data;
 namespace SistemaDeControle.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250423013020_Inicial")]
+    [Migration("20250423165807_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />

@@ -67,7 +67,7 @@ namespace SistemaDeControle.Server.Services
                 Descricao = projeto.Descricao,
                 Vinculos = projeto.Vinculos.Select(v => new VinculoDTO
                 {
-                    AlunoNome = v.Usuario?.Nome ?? "Desconhecido", // <-- Aqui é onde evitamos o warning
+                    AlunoNome = v.Usuario?.Nome ?? "Desconhecido", // consertando warning de nullability que dava ao rodar
                     Funcao = v.Funcao
                 }).ToList()
             };
